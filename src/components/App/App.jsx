@@ -1,10 +1,14 @@
 import "./App.css";
 import Preloader from "../Preloader/Preloader";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 
 function App() {
   return (
     <>
-      App <Preloader />
+      <Header />
+      <Preloader />
+      <Footer />
     </>
   );
 }
