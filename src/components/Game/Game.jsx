@@ -18,6 +18,7 @@ function Game() {
       version: "weekly",
     });
 
+    // TODO - only create a new panorama / map if one doesnt already exist
     loader
       .importLibrary("streetView")
       .then(({ StreetViewPanorama }) => {

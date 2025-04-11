@@ -1,0 +1,15 @@
+.leaderboard {
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+.leaderboard__header {
+  margin-bottom: 12px;
+}
+.leaderboard__card-list {
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
