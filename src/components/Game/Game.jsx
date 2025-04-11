@@ -56,6 +56,10 @@ function Game() {
     <div className="game">
       <div className="game__pano" id="pano"></div>
       <div className="game__map" id="map"></div>
+      <div className="game__header">
+        <p>Round: 3 / 5</p>
+        <p>Score: 2345</p>
+      </div>
     </div>
   );
 }
