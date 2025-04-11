@@ -3,16 +3,30 @@
   gap: 4px;
   list-style: none;
   margin: 0;
+  padding: 0;
 }
+
+/* .navbar__item {
+  border: solid 1px black;
+  border-radius: 5px;
+  padding: 4px 8px 1px;
+  background-color: rgb(199, 199, 199);
+} */
 
 .navbar__button {
   border: solid 1px black;
   border-radius: 5px;
   padding: 4px 8px 1px;
+  background-color: white;
+  text-decoration: none;
+  color: black;
+  user-select: none;
+}
+.navbar__button_selected {
   background-color: rgb(199, 199, 199);
 }
-
 .navbar__button:hover {
-  background-color: white;
+  background-color: rgb(199, 199, 199);
+  text-shadow: 3px 3px 10px rgba(40, 100, 105, 0.5);
   cursor: pointer;
 }
