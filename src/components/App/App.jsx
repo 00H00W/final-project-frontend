@@ -28,11 +28,13 @@ function App() {
   return (
     <div className="app">
       <Header openModal={openModal} />
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/game" element={<Game />} />
-        <Route path="/leaderboard" element={<Leaderboard />} />
-      </Routes>
+      <div className="app__content">
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/game" element={<Game />} />
+          <Route path="/leaderboard" element={<Leaderboard />} />
+        </Routes>
+      </div>
       <LoginModal
         isOpen={activeModal === "login"}
         closeActiveModal={closeActiveModal}
