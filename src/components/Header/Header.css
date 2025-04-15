@@ -1,6 +1,39 @@
 .header {
-  border-bottom: 1px black solid;
+  background-color: rgb(178, 211, 226);
+  background-image: linear-gradient(
+    to right,
+    rgb(178, 211, 226),
+    rgb(222, 239, 247)
+  );
   display: flex;
-  justify-content: space-between;
+  align-items: stretch;
   padding: 6px;
+  border-bottom: solid 1px rgb(178, 211, 226);
+}
+
+.header__logo {
+  margin-right: 32px;
+}
+
+.header__logo-image {
+  height: 48px;
+}
+
+.header__account-buttons {
+  margin: auto 0 auto auto;
+}
+
+.header__button {
+  min-height: 100%;
+  border: 2px solid rgb(37, 138, 201);
+  border-radius: 12px;
+  padding: 6px 12px;
+  margin-right: 8px;
+  transition: all 0.2s;
+}
+.header__button:hover {
+  transition: all 0.2s;
+}
+.header__button:active {
+  transition: all 0.2s;
 }

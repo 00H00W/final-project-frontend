@@ -9,17 +9,17 @@ function NavBar() {
       <ul className="navbar__list">
         <li className="navbar__item">
           <NavLink className={className} to={"/"}>
-            Home
+            <p className="navbar__button-text">Home</p>
           </NavLink>
         </li>
         <li className="navbar__item">
           <NavLink className={className} to={"/game"}>
-            Play
+            <p className="navbar__button-text">Play</p>
           </NavLink>
         </li>
         <li className="navbar__item">
           <NavLink className={className} to={"/leaderboard"}>
-            Leader Boards
+            <p className="navbar__button-text">Leaderboard</p>
           </NavLink>
         </li>
       </ul>
