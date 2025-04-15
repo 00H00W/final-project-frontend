@@ -1,3 +1,18 @@
 .about-section {
+  width: 100%;
+  padding: 48px 0;
+  background-color: rgb(222, 239, 247);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+}
+
+.about-section__text-content {
   max-width: 480px;
+}
+
+.about-section__headshot {
+  border-radius: 8px;
+  max-height: 200px;
 }
