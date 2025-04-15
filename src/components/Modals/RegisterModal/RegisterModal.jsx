@@ -1,17 +1,19 @@
-import "./LoginModal";
 import React from "react";
+import "./RegisterModal.css";
 import ModalWithForm from "../ModalWithForm/ModalWithForm";
 
-function LoginModal({
+function RegisterModal({
   closeActiveModal,
   isOpen,
-  handleAuthorization,
+  handleRegistration,
   isLoading,
-  openRegisterModal,
+  openLoginModal,
 }) {
   const [data, setData] = React.useState({
     email: "",
     password: "",
+    name: "",
+    avatar: "",
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -29,28 +31,30 @@ function LoginModal({
     setData({
       email: "",
       password: "",
+      name: "",
+      avatar: "",
     });
   }
   function handleSubmit(e) {
     e.preventDefault();
-    handleAuthorization(data);
+    handleRegistration(data);
   }
 
   return (
     <ModalWithForm
-      title="Log in"
-      submit="Log in"
+      title="Sign up"
+      submit="Next"
       isOpen={isOpen}
       onCloseButtonClick={closeActiveModal}
       onSubmit={handleSubmit}
       isLoading={isLoading}
-      altSubmit={"or Register"}
-      onAltSubmit={openRegisterModal}
+      altSubmit={"or Log in"}
+      onAltSubmit={openLoginModal}
     >
-      <label htmlFor="login-email" className="modal__label">
+      <label htmlFor="register-email" className="modal__label">
         Email{" "}
         <input
-          id="login-email"
+          id="register-email"
           type="email"
           name="email"
           className="modal__input"
@@ -60,10 +64,10 @@ function LoginModal({
           required
         />
       </label>
-      <label htmlFor="login-password" className="modal__label">
+      <label htmlFor="register-password" className="modal__label">
         Password{" "}
         <input
-          id="login-password"
+          id="register-password"
           type="password"
           name="password"
           className="modal__input"
@@ -73,8 +77,34 @@ function LoginModal({
           required
         />
       </label>
+      <label htmlFor="register-name" className="modal__label">
+        Name{" "}
+        <input
+          id="register-name"
+          type="text"
+          name="name"
+          className="modal__input"
+          placeholder="Name"
+          value={data.name}
+          onChange={handleChange}
+          required
+        />
+      </label>
+      <label htmlFor="register-avatarUrl" className="modal__label">
+        Avatar URL{" "}
+        <input
+          id="register-avatarUrl"
+          type="url"
+          name="avatar"
+          className="modal__input"
+          placeholder="Avatar URL"
+          value={data.avatar}
+          onChange={handleChange}
+          required
+        />
+      </label>
     </ModalWithForm>
   );
 }
 
-export default LoginModal;
+export default RegisterModal;
