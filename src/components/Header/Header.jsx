@@ -2,6 +2,7 @@ import "./Header.css";
 import NavBar from "../NavBar/NavBar";
 import logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
+import Button from "../Button/Button";
 
 function Header({ openModal }) {
   return (
@@ -11,24 +12,20 @@ function Header({ openModal }) {
       </Link>
       <NavBar />
       <span className="header__account-buttons">
-        <button
-          className="header__button"
-          type="button"
+        <Button
           onClick={() => {
             openModal("login");
           }}
         >
           Log in
-        </button>
-        <button
-          className="header__button"
-          type="button"
+        </Button>
+        <Button
           onClick={() => {
             openModal("register");
           }}
         >
           Sign up
-        </button>
+        </Button>
       </span>
     </header>
   );

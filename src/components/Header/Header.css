@@ -22,18 +22,3 @@
 .header__account-buttons {
   margin: auto 0 auto auto;
 }
-
-.header__button {
-  min-height: 100%;
-  border: 2px solid rgb(37, 138, 201);
-  border-radius: 12px;
-  padding: 6px 12px;
-  margin-right: 8px;
-  transition: all 0.2s;
-}
-.header__button:hover {
-  transition: all 0.2s;
-}
-.header__button:active {
-  transition: all 0.2s;
-}
