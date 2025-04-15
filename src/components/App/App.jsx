@@ -43,7 +43,6 @@ function App() {
         isOpen={activeModal === "register"}
         closeActiveModal={closeActiveModal}
       />
-      <Preloader />
       <Footer />
     </div>
   );
