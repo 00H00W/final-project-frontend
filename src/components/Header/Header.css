@@ -21,4 +21,6 @@
 
 .header__account-buttons {
   margin: auto 0 auto auto;
+  display: flex;
+  gap: 8px;
 }
