@@ -1,5 +1,6 @@
 import "./Leaderboard.css";
 import LeaderCard from "./LeaderCard/LeaderCard";
+import Button from "../Button/Button";
 
 const testData = [
   { rank: 1, username: "test user 1", score: 5000 },
@@ -10,24 +11,26 @@ const testData = [
 function Leaderboard() {
   return (
     <section className="leaderboard">
-      <div className="leaderboard__header">
-        <select name="name" id="id">
-          <option value="A">Global</option>
-          <option value="C">Local</option>
-          <option value="B">Friends</option>
-        </select>
-        <button>Center</button>
+      <div className="leaderboard__content">
+        <div className="leaderboard__header">
+          <select className="leaderboard__dropdown" name="name" id="id">
+            <option value="global">Global</option>
+            <option value="friends">Friends</option>
+            <option value="personal">Personal</option>
+            <option value="local">Local</option>
+          </select>
+        </div>
+        <ol className="leaderboard__card-list">
+          {testData.map((item, i) => {
+            return (
+              <LeaderCard
+                key={i /* replace this with a user's unique id ?*/}
+                user={item}
+              />
+            );
+          })}
+        </ol>
       </div>
-      <ol className="leaderboard__card-list">
-        {testData.map((item, i) => {
-          return (
-            <LeaderCard
-              key={i /* replace this with a user's unique id ?*/}
-              user={item}
-            />
-          );
-        })}
-      </ol>
     </section>
   );
 }

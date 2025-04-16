@@ -6,6 +6,7 @@
 }
 .button:hover {
   transition: all 0.2s;
+  cursor: pointer;
 }
 .button:active {
   transition: all 0.2s;
