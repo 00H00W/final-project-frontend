@@ -4,7 +4,8 @@ import Button from "../Button/Button";
 import { useState, useEffect } from "react";
 import { getItems, postItem, GetItemsSorted } from "../../utils/mockApi";
 
-// instead, we should only be fetching a new list of items and appending it to the array
+// TODO
+// only fetch the specified number of database entries (lower bound -> upper bound)
 
 const pageLimit = 7;
 
