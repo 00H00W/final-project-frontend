@@ -26,6 +26,14 @@
   cursor: pointer;
 }
 
+.leaderboard__load-button {
+  display: inline-block;
+  margin: 4px auto;
+}
+.leaderboard__load-button_disabled {
+  visibility: hidden;
+}
+
 .leaderboard__card-list {
   margin: 0 auto;
   padding: 0;

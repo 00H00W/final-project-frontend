@@ -4,14 +4,14 @@ import Button from "../Button/Button";
 import { useState, useEffect } from "react";
 import { getItems, postItem, GetItemsSorted } from "../../utils/mockApi";
 
-// const testData = [
-//   { rank: 1, username: "test user 1", score: 5000 },
-//   { rank: 2, username: "test user 2", score: 4000 },
-//   { rank: 3, username: "test user 3", score: 3999 },
-// ];
+// instead, we should only be fetching a new list of items and appending it to the array
+
+const pageLimit = 7;
 
 function Leaderboard() {
   const [scoreData, setScoreData] = useState([]);
+  const [lowerBound, setLowerBound] = useState(0);
+  const [upperBound, setUpperBound] = useState(pageLimit);
 
   useEffect(() => {
     console.log(GetItemsSorted());
@@ -30,14 +30,43 @@ function Leaderboard() {
           </select>
         </div>
         <ol className="leaderboard__card-list">
-          {scoreData.map((item, i) => {
-            return (
-              <LeaderCard
-                key={i /* replace this with a user's unique id ?*/}
-                user={{ ...item, rank: i + 1 }}
-              />
-            );
+          {lowerBound > 0 ? (
+            <Button
+              className="leaderboard__load-button"
+              onClick={() => {
+                setLowerBound(lowerBound - pageLimit);
+              }}
+            >
+              Load More
+            </Button>
+          ) : (
+            <></>
+          )}
+
+          {Array.from(
+            new Array(upperBound - lowerBound),
+            (x, i) => i + lowerBound
+          ).map((item, i) => {
+            if (item < scoreData.length && item >= 0)
+              return (
+                <LeaderCard
+                  key={scoreData[item]?._id}
+                  user={{ ...scoreData[item], rank: item + 1 }}
+                />
+              );
           })}
+          {upperBound < scoreData.length ? (
+            <Button
+              className="leaderboard__load-button"
+              onClick={() => {
+                setUpperBound(upperBound + pageLimit);
+              }}
+            >
+              Load More
+            </Button>
+          ) : (
+            <></>
+          )}
         </ol>
       </div>
     </section>

@@ -19,7 +19,12 @@ export function getItems() {
   return fetchCall("/items");
 }
 export function postItem(body, token) {
-  return fetchCall("/items", token, "POST", JSON.stringify(body));
+  return fetchCall(
+    "/items?_sort=score,username&_order=desc,asc",
+    token,
+    "POST",
+    JSON.stringify(body)
+  );
 }
 export function GetItemsSorted() {
   return fetchCall("/items?_sort=score,username&_order=desc,asc");
