@@ -1,0 +1,109 @@
+{
+  "items": [
+    {
+      "_id": 0,
+      "username": "Test User",
+      "score": 3
+    },
+    {
+      "username": "test user 2",
+      "score": 45,
+      "_id": 1
+    },
+    {
+      "username": "test user 2",
+      "score": 67,
+      "_id": 2
+    },
+    {
+      "username": "test user 2",
+      "score": 78,
+      "_id": 3
+    },
+    {
+      "username": "test user 2",
+      "score": 56,
+      "_id": 4
+    },
+    {
+      "username": "test user 2",
+      "score": 23,
+      "_id": 5
+    },
+    {
+      "username": "test user 2",
+      "score": 1,
+      "_id": 6
+    },
+    {
+      "_id": 7,
+      "username": "A Test User",
+      "score": 89
+    },
+    {
+      "username": "test user 2",
+      "score": 45,
+      "_id": 8
+    },
+    {
+      "username": "test user 2",
+      "score": 67,
+      "_id": 9
+    },
+    {
+      "username": "test user 2",
+      "score": 78,
+      "_id": 10
+    },
+    {
+      "username": "test user 2",
+      "score": 56,
+      "_id": 11
+    },
+    {
+      "username": "test user 2",
+      "score": 23,
+      "_id": 12
+    },
+    {
+      "username": "test user 2",
+      "score": 1,
+      "_id": 13
+    },
+    {
+      "_id": 14,
+      "username": "B Test User",
+      "score": 89
+    },
+    {
+      "username": "test user 2",
+      "score": 45,
+      "_id": 15
+    },
+    {
+      "username": "test user 2",
+      "score": 67,
+      "_id": 16
+    },
+    {
+      "username": "test user 2",
+      "score": 78,
+      "_id": 17
+    },
+    {
+      "username": "test user 2",
+      "score": 56,
+      "_id": 18
+    },
+    {
+      "username": "test user 2",
+      "score": 23,
+      "_id": 19
+    },
+    {
+      "username": "test user 2",
+      "score": 1,
+      "_id": 20
+    }
+  ]
+}
