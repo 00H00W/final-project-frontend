@@ -45,7 +45,7 @@
   left: 20px;
   z-index: 2;
   box-sizing: border-box;
-  border: 2px solid rgb(37, 138, 201);
+  border: 2px solid #258ac9;
   border-radius: 12px;
   transition: all 0.2s;
   box-shadow: 0px 2px 20px -4px rgba(0, 0, 0, 1);
