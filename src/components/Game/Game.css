@@ -72,10 +72,28 @@
   box-sizing: border-box;
   transition: all 0.1s;
   opacity: 1;
+  position: relative;
+  padding: 0 0 4px;
 }
 .game__map-score_hidden {
   opacity: 0;
   transition: all 0.2s;
+}
+
+.game__distance-bar-background {
+  background-color: rgb(163, 194, 216);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+}
+.game__distance-bar {
+  background-color: rgb(37, 138, 201);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 4px;
 }
 
 .game__text {

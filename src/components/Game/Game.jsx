@@ -35,6 +35,8 @@ function Game({ setActiveModal, isLoggedIn, postGameData }) {
     setSummaryModalOpen(false);
     const newPosition = GetPosition();
     setActual(newPosition);
+    setGuess(null);
+    mapMarker.setMap(null);
     GetPano(newPosition, panorama);
     setRecapState(false);
     setGameData(null);
@@ -235,7 +237,15 @@ function Game({ setActiveModal, isLoggedIn, postGameData }) {
           >
             <p className="game__text">{displayDistance(roundData.distance)}</p>
             <p className="game__text">{`+${roundData.score} pts`}</p>
+            <div className="game__distance-bar-background"></div>
+            <div
+              className="game__distance-bar"
+              style={{
+                width: 100 - roundData.distance / 200000 + "%",
+              }}
+            ></div>
           </div>
+
           <div className="game__map" id="map"></div>
           {!recapState ? (
             <button
