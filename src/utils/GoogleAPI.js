@@ -150,7 +150,7 @@ const template = [
 
 export function CalculateScoreValue(geodistance) {
   return Math.round(
-    min(1.01 * Math.pow(1 - geodistance / 20000000, 3), 1) * 5000
+    min(Math.pow(1 - (geodistance - 1000) / 20000000, 2), 1) * 5000
   );
 }
 
