@@ -8,6 +8,7 @@ function RegisterModal({
   handleRegistration,
   isLoading,
   openLoginModal,
+  modalData,
 }) {
   const [data, setData] = React.useState({
     email: "",
@@ -50,6 +51,7 @@ function RegisterModal({
       isLoading={isLoading}
       altSubmit={"or Log in"}
       onAltSubmit={openLoginModal}
+      modalData={modalData}
     >
       <label htmlFor="register-email" className="modal__label">
         Email{" "}

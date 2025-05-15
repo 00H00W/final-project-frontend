@@ -7,8 +7,9 @@ import {
   GetPano,
 } from "../../utils/GoogleAPI";
 import Button from "../Button/Button";
+import GameSummaryModal from "../Modals/GameSummaryModal/GameSummaryModal";
 
-function Game() {
+function Game({ setActiveModal, isLoggedIn, postGameData }) {
   // map components
   const [panorama, setPanorama] = useState(null);
   const [map, setMap] = useState(null);
@@ -17,29 +18,29 @@ function Game() {
   // game state
   const [guess, setGuess] = useState(null);
   const [actual, setActual] = useState(null);
-  const [round, setRound] = useState(0);
+  const [round, setRound] = useState(1);
   const [score, setScore] = useState(0);
   const [recapState, setRecapState] = useState(false);
+  const [gameData, setGameData] = useState(null);
+  const [summaryModalOpen, setSummaryModalOpen] = useState(false);
+  const [mapGraphics, setMapGraphics] = useState([]);
 
   const fenway = { lat: 42.345573, lng: -71.098326 };
 
-  function GetRecapState() {
-    console.log(recapState);
-    return recapState;
-  }
-
-  function makeGuess(e) {
-    console.log(mapMarker);
-    if (!recapState) {
-      const position = {
-        lat: e.latLng.lat(),
-        lng: e.latLng.lng(),
-      };
-      mapMarker.setMap(map);
-      mapMarker.position = position;
-      setGuess(position);
-    }
-  }
+  const handleReset = () => {
+    setScore(0);
+    setRound(1);
+    setSummaryModalOpen(false);
+    const newPosition = GetPosition();
+    setActual(newPosition);
+    GetPano(newPosition, panorama);
+    setRecapState(false);
+    setGameData(null);
+    mapGraphics.forEach((item) => {
+      item.setMap(null);
+    });
+    setMapGraphics([]);
+  };
 
   const submitGuess = () => {
     // iterate score
@@ -49,27 +50,45 @@ function Game() {
     setScore(score + newScore);
 
     // draw map graphics
-    new google.maps.Polyline({
-      map,
-      path: [guess, actual],
-      geodesic: false,
-      strokeColor: "#FF0000",
-      strokeWeight: 2,
-    });
-    new google.maps.marker.AdvancedMarkerElement({
-      map,
-      position: actual,
-    });
+    // console.log(mapGraphics.length);
+    mapGraphics.push(
+      new google.maps.Polyline({
+        map,
+        path: [guess, actual],
+        geodesic: false,
+        strokeColor: "#FF0000",
+        strokeWeight: 2,
+      })
+    );
+    mapGraphics.push(
+      new google.maps.Polyline({
+        map,
+        path: [guess, actual],
+        geodesic: true,
+        strokeColor: "#FF0000",
+        strokeOpacity: 0.25,
+        strokeWeight: 2,
+      })
+    );
+    mapGraphics.push(
+      new google.maps.marker.AdvancedMarkerElement({
+        map,
+        position: actual,
+      })
+    );
     const pinStyle = new google.maps.marker.PinElement({
       background: "#258ac9",
       borderColor: "#0d6297",
       glyphColor: "#0d6297",
     });
-    new google.maps.marker.AdvancedMarkerElement({
-      map,
-      position: guess,
-      content: pinStyle.element,
-    });
+    mapGraphics.push(
+      new google.maps.marker.AdvancedMarkerElement({
+        map,
+        position: guess,
+        content: pinStyle.element,
+      })
+    );
+    // console.log(mapGraphics.length);
 
     // remove old guess
     setGuess(null);
@@ -83,14 +102,17 @@ function Game() {
     // iterate round
     if (round === 5) {
       // end game
+      if (isLoggedIn) postGameData({ score: score, rounds: 5 });
+      setGameData({ score: score, rounds: 5 });
+      setSummaryModalOpen(true);
     } else {
       setRound(round + 1);
-    }
 
-    // set new panorama position
-    const newPosition = GetPosition();
-    setActual(newPosition);
-    GetPano(newPosition, panorama);
+      // set new panorama position
+      const newPosition = GetPosition();
+      setActual(newPosition);
+      GetPano(newPosition, panorama);
+    }
 
     // toggle recap state
     setRecapState(false);
@@ -99,8 +121,8 @@ function Game() {
   useEffect(() => {
     const startPosition = GetPosition();
     setActual(startPosition);
-    setRound(1);
-    setScore(0);
+    // setRound(1);
+    // setScore(0);
 
     // AIzaSyAngbtnimx927JnCrvxEx2ZvPUknY3bsoI
     // AIzaSyDtw4jIS0wrL1nl7HC50zDT-ZhMNx5Jb94
@@ -182,29 +204,44 @@ function Game() {
       });
   }, []);
 
+  useEffect(() => {
+    if (isLoggedIn && gameData !== null) {
+      postGameData(gameData);
+    }
+  }, [isLoggedIn]);
+
   return (
     <div className="game">
       <div className="game__pano" id="pano">
-        <div className="game__map" id="map"></div>
-        {!recapState ? (
-          <button
-            className="game__guess-button"
-            disabled={guess == null}
-            onClick={submitGuess}
-          >
-            Make Guess
-          </button>
-        ) : (
-          <button className="game__guess-button" onClick={nextRound}>
-            Next Round
-          </button>
-        )}
+        <div className="game__map-popout">
+          <div className="game__map" id="map"></div>
+          {!recapState ? (
+            <button
+              className="game__guess-button"
+              disabled={guess == null}
+              onClick={submitGuess}
+            >
+              Make Guess
+            </button>
+          ) : (
+            <button className="game__guess-button" onClick={nextRound}>
+              {round === 5 ? "Finish" : "Next Round"}
+            </button>
+          )}
+        </div>
 
         <div className="game__header">
           <p>Round: {round} / 5</p>
           <p>Score: {score}</p>
         </div>
       </div>
+      <GameSummaryModal
+        modalData={gameData}
+        isOpen={summaryModalOpen}
+        openModal={setActiveModal}
+        isLoggedIn={isLoggedIn}
+        resetGame={handleReset}
+      ></GameSummaryModal>
     </div>
   );
 }

@@ -20,7 +20,7 @@
 }
 
 .header__account-buttons {
-  margin: auto 0 auto auto;
+  margin: auto 12px auto auto;
   display: flex;
   gap: 8px;
 }

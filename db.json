@@ -104,6 +104,12 @@
       "username": "Charles",
       "score": 1,
       "_id": 20
+    },
+    {
+      "score": 7147,
+      "rounds": 5,
+      "username": "fake user",
+      "_id": 21
     }
   ]
 }
