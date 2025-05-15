@@ -34,10 +34,11 @@ function Game({ setActiveModal, isLoggedIn, postGameData }) {
     setRound(1);
     setSummaryModalOpen(false);
     const newPosition = GetPosition();
-    setActual(newPosition);
     setGuess(null);
     mapMarker.setMap(null);
-    GetPano(newPosition, panorama);
+    GetPano(newPosition, panorama).then((data) =>
+      setActual(data.data.location.latLng)
+    );
     setRecapState(false);
     setGameData(null);
     mapGraphics.forEach((item) => {
@@ -48,6 +49,7 @@ function Game({ setActiveModal, isLoggedIn, postGameData }) {
 
   const submitGuess = () => {
     // iterate score
+    console.log(actual);
     const distance = google.maps.geometry.spherical.computeDistanceBetween(
       guess,
       actual
@@ -117,8 +119,9 @@ function Game({ setActiveModal, isLoggedIn, postGameData }) {
 
       // set new panorama position
       const newPosition = GetPosition();
-      setActual(newPosition);
-      GetPano(newPosition, panorama);
+      GetPano(newPosition, panorama).then((data) =>
+        setActual(data.data.location.latLng)
+      );
     }
 
     // toggle recap state
@@ -136,7 +139,6 @@ function Game({ setActiveModal, isLoggedIn, postGameData }) {
 
   useEffect(() => {
     const startPosition = GetPosition();
-    setActual(startPosition);
     // setRound(1);
     // setScore(0);
 
@@ -158,7 +160,7 @@ function Game({ setActiveModal, isLoggedIn, postGameData }) {
           console.log("successfully loaded streetView library");
           console.log(startPosition);
           newPano = new StreetViewPanorama(document.getElementById("pano"), {
-            position: startPosition,
+            position: fenway,
             addressControl: false,
             zoomControl: false,
           });
@@ -168,7 +170,9 @@ function Game({ setActiveModal, isLoggedIn, postGameData }) {
             );
           });
           // console.log(newPano);
-          GetPano(startPosition, newPano);
+          GetPano(startPosition, newPano).then((data) =>
+            setActual(data.data.location.latLng)
+          );
           setPanorama(newPano);
         })
         .catch(console.error);

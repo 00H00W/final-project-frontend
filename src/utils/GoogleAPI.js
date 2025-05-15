@@ -170,7 +170,7 @@ export function GetPano(position, streetview) {
       //   console.log(data);
       //   console.log(panorama);
       streetview.setPano(data.data.location.pano);
-      //   return data.data.location.pano;
+      return data;
     })
     .catch(console.error);
 }
