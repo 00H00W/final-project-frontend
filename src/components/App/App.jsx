@@ -14,7 +14,7 @@ import { postItem } from "../../utils/mockApi";
 import Button from "../Button/Button";
 
 function App() {
-  const [activeModal, setActiveModal] = React.useState({ name: "" });
+  const [activeModal, setActiveModal] = React.useState("");
   const [loading, setLoading] = React.useState(false);
   const [isLoggedIn, setIsLoggedIn] = React.useState(false);
   const [currentUser, setCurrentUser] = React.useState({
