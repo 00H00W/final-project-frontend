@@ -1,0 +1,36 @@
+.profile-modal {
+  background-color: rgba(243, 243, 243, 1);
+  border-left: 2px solid rgb(37, 138, 201);
+  padding: 28px 28px 36px;
+  /* max-width: 496px; */
+  height: 100%;
+  margin-left: auto;
+  width: 300px;
+  transform: translate(300px, 0);
+  box-sizing: border-box;
+  /* border-radius: 20px; */
+  transition: all 0.2s;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-modal_opened {
+  transform: translate(0, 0);
+  transition: all 0.2s;
+}
+
+.profile-modal__avatar {
+  max-width: 150px;
+  max-height: 150px;
+  width: 100%;
+  aspect-ratio: 1;
+  border: 2px solid rgb(37, 138, 201);
+  border-radius: 25%;
+}
+
+.profile-modal__name {
+  font-size: 30px;
+  margin: 12px 0 0;
+}

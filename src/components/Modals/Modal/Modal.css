@@ -24,12 +24,3 @@
   opacity: 1;
   transition: all 0.2s;
 }
-.modal__content {
-  background-color: rgba(243, 243, 243, 1);
-  position: relative;
-  padding: 28px 28px 36px;
-  max-width: 496px;
-  width: 100%;
-  box-sizing: border-box;
-  border-radius: 20px;
-}

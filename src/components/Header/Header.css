@@ -24,3 +24,26 @@
   display: flex;
   gap: 8px;
 }
+
+.header__profile-button {
+  display: flex;
+  align-items: center;
+  padding: 0 4px;
+}
+.header__profile-button:hover {
+  cursor: pointer;
+}
+
+.header__profile-image {
+  max-width: 40px;
+  max-height: 40px;
+  width: 100%;
+  aspect-ratio: 1;
+  border: 2px solid rgb(37, 138, 201);
+  border-radius: 50%;
+}
+
+.header__profile-name {
+  margin: 0 0 0 8px;
+  user-select: none;
+}

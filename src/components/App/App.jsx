@@ -12,6 +12,7 @@ import RegisterModal from "../Modals/RegisterModal/RegisterModal";
 import * as auth from "../../utils/auth";
 import { postItem } from "../../utils/mockApi";
 import Button from "../Button/Button";
+import ProfileModal from "../Modals/Profile/ProfileModal";
 
 function App() {
   const [activeModal, setActiveModal] = React.useState("");
@@ -88,7 +89,11 @@ function App() {
   };
   return (
     <div className="app">
-      <Header openModal={openModal} isLoggedIn={isLoggedIn} />
+      <Header
+        openModal={openModal}
+        isLoggedIn={isLoggedIn}
+        userData={currentUser}
+      />
       <div className="app__content">
         <Routes>
           <Route path="/" element={<Main />} />
@@ -106,18 +111,24 @@ function App() {
         </Routes>
       </div>
       <LoginModal
+        isLoading={loading}
         isOpen={activeModal === "login"}
         openRegisterModal={() => openModal("register")}
         closeActiveModal={closeActiveModal}
         handleAuthorization={handleAuthorization}
       />
       <RegisterModal
+        isLoading={loading}
         isOpen={activeModal === "register"}
         openLoginModal={() => openModal("login")}
         closeActiveModal={closeActiveModal}
         handleRegistration={handleRegistration}
       />
-
+      <ProfileModal
+        userData={currentUser}
+        isOpen={activeModal === "profile"}
+        closeActiveModal={closeActiveModal}
+      ></ProfileModal>
       <Footer />
     </div>
   );

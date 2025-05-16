@@ -4,7 +4,7 @@ import logo from "../../assets/logo.png";
 import { Link } from "react-router-dom";
 import Button from "../Button/Button";
 
-function Header({ openModal, isLoggedIn }) {
+function Header({ openModal, isLoggedIn, userData }) {
   return (
     <header className="header">
       <Link className="header__logo" to={"/"}>
@@ -14,8 +14,19 @@ function Header({ openModal, isLoggedIn }) {
       <span className="header__account-buttons">
         {isLoggedIn ? (
           <>
-            {/* TODO change this to include avatar and name */}
-            <Button>Profile</Button>
+            <span
+              onClick={() => {
+                openModal("profile");
+              }}
+              className="header__profile-button"
+            >
+              <img
+                className="header__profile-image"
+                src={userData?.data.avatar}
+                alt="User's avatar"
+              />
+              <p className="header__profile-name">{userData?.data.name}</p>
+            </span>
           </>
         ) : (
           <>

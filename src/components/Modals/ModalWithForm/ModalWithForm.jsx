@@ -22,42 +22,44 @@ function ModalWithForm({
 
   return (
     <Modal isOpen={isOpen} closeActiveModal={onCloseButtonClick}>
-      <h2 className="modal__title">{title}</h2>
-      <button
-        onClick={onCloseButtonClick}
-        className="modal__close"
-        type="button"
-      >
-        {/* <img src={closeIcon} alt="Close Icon" /> */}
-        Close
-      </button>
-      <form
-        className="modal__form"
-        onChange={checkFormValidity}
-        onSubmit={onSubmit}
-      >
-        {children}
-        <div className="modal__submit-container">
-          <button
-            disabled={!valid || isLoading}
-            type="submit"
-            className="modal__submit-button"
-          >
-            {isLoading ? "Loading..." : submit}
-          </button>
-          {altSubmit !== null ? (
+      <div className="modal__content">
+        <h2 className="modal__title">{title}</h2>
+        <button
+          onClick={onCloseButtonClick}
+          className="modal__close"
+          type="button"
+        >
+          {/* <img src={closeIcon} alt="Close Icon" /> */}
+          Close
+        </button>
+        <form
+          className="modal__form"
+          onChange={checkFormValidity}
+          onSubmit={onSubmit}
+        >
+          {children}
+          <div className="modal__submit-container">
             <button
-              className="modal__alt-submit-button"
-              type="button"
-              onClick={onAltSubmit}
+              disabled={!valid || isLoading}
+              type="submit"
+              className="modal__submit-button"
             >
-              {altSubmit}
+              {isLoading ? "Loading..." : submit}
             </button>
-          ) : (
-            <></>
-          )}
-        </div>
-      </form>
+            {altSubmit !== null ? (
+              <button
+                className="modal__alt-submit-button"
+                type="button"
+                onClick={onAltSubmit}
+              >
+                {altSubmit}
+              </button>
+            ) : (
+              <></>
+            )}
+          </div>
+        </form>
+      </div>
     </Modal>
   );
 }
