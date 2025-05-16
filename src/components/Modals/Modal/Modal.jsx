@@ -1,8 +1,11 @@
 import "./Modal.css";
 
-function Modal({ children, isOpen }) {
+function Modal({ children, isOpen, closeActiveModal }) {
   return (
-    <div className={`modal ${isOpen ? "modal_opened" : ""}`}>
+    <div
+      onClick={closeActiveModal}
+      className={`modal ${isOpen ? "modal_opened" : ""}`}
+    >
       <div className="modal__content">{children}</div>
     </div>
   );

@@ -21,7 +21,7 @@ function ModalWithForm({
   };
 
   return (
-    <Modal isOpen={isOpen}>
+    <Modal isOpen={isOpen} closeActiveModal={onCloseButtonClick}>
       <h2 className="modal__title">{title}</h2>
       <button
         onClick={onCloseButtonClick}
