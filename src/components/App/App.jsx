@@ -107,7 +107,10 @@ function App() {
               />
             }
           />
-          <Route path="/leaderboard" element={<Leaderboard />} />
+          <Route
+            path="/leaderboard"
+            element={<Leaderboard currentUser={currentUser} />}
+          />
         </Routes>
       </div>
       <LoginModal
