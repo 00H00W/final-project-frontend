@@ -8,6 +8,8 @@ import {
   GetItemsSorted,
   getItemsRange,
   getUserRank,
+  LikeItem,
+  UnlikeItem,
 } from "../../utils/mockApi";
 
 // TODO
@@ -59,6 +61,11 @@ function Leaderboard({ currentUser }) {
           break;
       }
     }
+  };
+
+  const handleSaveItem = (entry) => {
+    if (entry.liked) return UnlikeItem(entry._id);
+    else return LikeItem(entry._id);
   };
 
   function GetDropdownBlurb(value) {
@@ -127,6 +134,7 @@ function Leaderboard({ currentUser }) {
               <LeaderCard
                 key={item._id}
                 user={{ ...item, rank: item.index + 1 }}
+                saveItem={handleSaveItem}
               />
             );
           })}

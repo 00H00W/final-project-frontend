@@ -6,6 +6,9 @@
   gap: 12px;
   padding: 4px 12px;
 }
+.leadercard:hover {
+  cursor: pointer;
+}
 
 .leadercard__text {
   margin: 0;
@@ -15,4 +18,12 @@
 }
 .leadercard__text:last-child {
   margin-left: auto;
+}
+
+.leadercard__save-icon {
+  height: 20px;
+  opacity: 0.5;
+}
+.leadercard:hover .leadercard__save-icon {
+  opacity: 1;
 }

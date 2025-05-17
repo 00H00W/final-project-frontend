@@ -1,12 +1,29 @@
 import "./LeaderCard.css";
+import bookmarkOpen from "../../../assets/bookmark-open.svg";
+import bookmarkClosed from "../../../assets/bookmark-closed.svg";
+import React from "react";
 
-function LeaderCard({ user }) {
-  const { rank, username, score } = user;
+function LeaderCard({ user, saveItem }) {
+  const [entry, setEntry] = React.useState(user);
+
+  const handleClick = () => {
+    saveItem(entry).then((data) => {
+      setEntry({ ...data });
+    });
+  };
+
+  console.log(entry);
+
   return (
-    <li className="leadercard">
-      <p className="leadercard__text"># {rank}</p>
-      <p className="leadercard__text">{username}</p>
-      <p className="leadercard__text">{score}pts</p>
+    <li onClick={handleClick} className="leadercard">
+      <p className="leadercard__text"># {entry.index + 1}</p>
+      <img
+        className="leadercard__save-icon"
+        src={entry.liked ? bookmarkOpen : bookmarkClosed}
+        alt="save icon empty"
+      />
+      <p className="leadercard__text">{entry.username}</p>
+      <p className="leadercard__text">{entry.score}pts</p>
     </li>
   );
 }
