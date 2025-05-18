@@ -118,8 +118,8 @@ function Leaderboard({ currentUser }) {
             id="id"
           >
             <option value="global">Global</option>
-            <option value="local">Local</option>
-            <option value="friends">Friends</option>
+            {currentUser.data ? <option value="local">Local</option> : <></>}
+            <option value="friends">Saved</option>
           </select>
           {GetDropdownBlurb(dropdownValue)}
         </div>

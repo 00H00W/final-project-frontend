@@ -12,8 +12,6 @@ function LeaderCard({ user, saveItem }) {
     });
   };
 
-  console.log(entry);
-
   return (
     <li onClick={handleClick} className="leadercard">
       <p className="leadercard__text"># {entry.index + 1}</p>
