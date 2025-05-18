@@ -19,7 +19,7 @@ function LeaderCard({ user, saveItem }) {
       <p className="leadercard__text"># {entry.index + 1}</p>
       <img
         className="leadercard__save-icon"
-        src={entry.liked ? bookmarkOpen : bookmarkClosed}
+        src={entry.liked ? bookmarkClosed : bookmarkOpen}
         alt="save icon empty"
       />
       <p className="leadercard__text">{entry.username}</p>

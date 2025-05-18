@@ -177,16 +177,20 @@ function sortItems() {
 export function getItems() {
   return fetchCall("/items");
 }
-export function getItemsRange(start, end) {
-  return new Promise((resolve) => setTimeout(resolve, 1000)).then(() => {
+export function getItemsRange(start, end, filterLiked = false) {
+  return new Promise((resolve) => setTimeout(resolve, 500)).then(() => {
     sortItems();
+    const items = filterLiked
+      ? database.items.filter((i) => i.liked)
+      : database.items;
+
     start = Math.max(start, 0);
     console.log(start);
 
     return {
-      items: database.items.slice(start, end),
+      items: items.slice(start, end),
       loadLower: start > 0,
-      loadUpper: end < database.items.length,
+      loadUpper: end < items.length,
     };
   });
 }
@@ -204,7 +208,7 @@ export function getGameCount() {
 }
 // switch to a user id system when backend is implemented
 export function getUserRank(username) {
-  return new Promise((resolve) => setTimeout(resolve, 1000))
+  return new Promise((resolve) => setTimeout(resolve, 500))
     .then(() => {
       sortItems();
       return database.items.find((i) => i.username === username);
@@ -214,6 +218,16 @@ export function getUserRank(username) {
       else return Promise.reject("User not found");
     })
     .catch(console.error);
+}
+export function getLiked() {
+  return new Promise((resolve) => setTimeout(resolve, 500)).then(() => {
+    sortItems();
+    return {
+      items: database.items.filter((i) => i.liked),
+      loadLower: false,
+      loadUpper: false,
+    };
+  });
 }
 export function LikeItem(id) {
   return new Promise((resolve) => setTimeout(resolve, 100))

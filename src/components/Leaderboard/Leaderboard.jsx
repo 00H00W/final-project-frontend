@@ -10,7 +10,9 @@ import {
   getUserRank,
   LikeItem,
   UnlikeItem,
+  getLiked,
 } from "../../utils/mockApi";
+import Preloader from "../Preloader/Preloader";
 
 // TODO
 // only fetch the specified number of database entries (lower bound -> upper bound)
@@ -24,19 +26,25 @@ function Leaderboard({ currentUser }) {
   const [loadLower, setLoadLower] = useState(false);
   const [loadUpper, setLoadUpper] = useState(false);
   const [dropdownValue, setDropdownValue] = useState("global");
+  const [filterLiked, setFilterLiked] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     //GetItemsSorted().then(setScoreData).catch(console.error);
     loadItems(0, pageLimit);
   }, []);
 
-  function loadItems(start, end) {
-    getItemsRange(start, end).then((data) => {
+  function loadItems(start, end, filterLiked) {
+    setScoreData([]);
+    setIsLoading(true);
+    getItemsRange(start, end, filterLiked).then((data) => {
+      setFilterLiked(filterLiked);
       setScoreData(data.items);
       setLoadLower(data.loadLower);
       setLoadUpper(data.loadUpper);
       setUpperBound(end);
       setLowerBound(start);
+      setIsLoading(false);
     });
   }
 
@@ -45,19 +53,26 @@ function Leaderboard({ currentUser }) {
       setDropdownValue(e.target.value);
       switch (e.target.value) {
         case "local":
+          setFilterLiked(false);
           if (currentUser?.data) {
             getUserRank(currentUser.data.name).then((userRank) => {
               loadItems(
                 userRank - Math.round(pageLimit / 2),
-                userRank + Math.round(pageLimit / 2)
+                userRank + Math.round(pageLimit / 2),
+                false
               );
             });
-          } else loadItems(0, pageLimit);
+          } else loadItems(0, pageLimit, false);
+          break;
 
+        case "friends":
+          setFilterLiked(true);
+          loadItems(0, pageLimit, true);
           break;
 
         default:
-          loadItems(0, pageLimit);
+          setFilterLiked(false);
+          loadItems(0, pageLimit, false);
           break;
       }
     }
@@ -109,18 +124,21 @@ function Leaderboard({ currentUser }) {
           {GetDropdownBlurb(dropdownValue)}
         </div>
         <ol className="leaderboard__card-list">
-          {loadLower ? (
+          {loadLower && !isLoading ? (
             <Button
               className="leaderboard__load-button"
               onClick={() => {
                 setLowerBound(lowerBound - pageLimit);
-                getItemsRange(lowerBound - pageLimit, lowerBound).then(
-                  (data) => {
-                    console.log(data);
-                    setLoadLower(data.loadLower);
-                    setScoreData([...data.items, ...scoreData]);
-                  }
-                );
+                setIsLoading(true);
+                getItemsRange(
+                  lowerBound - pageLimit,
+                  lowerBound,
+                  filterLiked
+                ).then((data) => {
+                  setIsLoading(false);
+                  setLoadLower(data.loadLower);
+                  setScoreData([...data.items, ...scoreData]);
+                });
               }}
             >
               Load More
@@ -138,17 +156,22 @@ function Leaderboard({ currentUser }) {
               />
             );
           })}
-          {loadUpper ? (
+          {isLoading ? <Preloader></Preloader> : <></>}
+          {loadUpper && !isLoading ? (
             <Button
               className="leaderboard__load-button"
               onClick={() => {
                 setUpperBound(upperBound + pageLimit);
-                getItemsRange(upperBound, upperBound + pageLimit).then(
-                  (data) => {
-                    setLoadUpper(data.loadUpper);
-                    setScoreData([...scoreData, ...data.items]);
-                  }
-                );
+                setIsLoading(true);
+                getItemsRange(
+                  upperBound,
+                  upperBound + pageLimit,
+                  filterLiked
+                ).then((data) => {
+                  setIsLoading(false);
+                  setLoadUpper(data.loadUpper);
+                  setScoreData([...scoreData, ...data.items]);
+                });
               }}
             >
               Load More
