@@ -1,14 +1,12 @@
 import "./Game.css";
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect } from "react";
 import {
   GetPosition,
   CalculateScoreValue,
   GetPano,
   loadGoogleApi,
 } from "../../utils/GoogleAPI";
-import Button from "../Button/Button";
 import GameSummaryModal from "../Modals/GameSummaryModal/GameSummaryModal";
-import ModalWithForm from "../Modals/ModalWithForm/ModalWithForm";
 import Preloader from "../Preloader/Preloader";
 
 function Game({ setActiveModal, isLoggedIn, postGameData }) {
@@ -49,7 +47,6 @@ function Game({ setActiveModal, isLoggedIn, postGameData }) {
 
   const submitGuess = () => {
     // iterate score
-    console.log(actual);
     const distance = google.maps.geometry.spherical.computeDistanceBetween(
       guess,
       actual
@@ -59,7 +56,6 @@ function Game({ setActiveModal, isLoggedIn, postGameData }) {
     setRoundData({ distance: distance, score: newScore });
 
     // draw map graphics
-    // console.log(mapGraphics.length);
     mapGraphics.push(
       new google.maps.Polyline({
         map,
@@ -97,7 +93,6 @@ function Game({ setActiveModal, isLoggedIn, postGameData }) {
         content: pinStyle.element,
       })
     );
-    // console.log(mapGraphics.length);
 
     // remove old guess
     setGuess(null);
@@ -137,10 +132,7 @@ function Game({ setActiveModal, isLoggedIn, postGameData }) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
   }
 
-  // useEffect is called twice due to strict mode in dev environments
-  // this can cause the initial round to be in an incorrect state
   useEffect(() => {
-    console.log("testing");
     setIsLoading(true);
     loadGoogleApi(setActual, setGuess)?.then(({ panorama, map, marker }) => {
       setPanorama(panorama);

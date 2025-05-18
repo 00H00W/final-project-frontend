@@ -255,8 +255,6 @@ export function GetPano(position, streetview) {
       ],
     })
     .then((data) => {
-      //   console.log(data);
-      //   console.log(panorama);
       streetview.setPano(data.data.location.pano);
       return data;
     })

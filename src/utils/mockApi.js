@@ -183,7 +183,6 @@ export function getItemsRange(start, end, filterLiked = false) {
       : database.items;
 
     start = Math.max(start, 0);
-    console.log(start);
 
     return {
       items: items.slice(start, end),

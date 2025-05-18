@@ -26,7 +26,6 @@ function Leaderboard({ currentUser }) {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    //GetItemsSorted().then(setScoreData).catch(console.error);
     loadItems(0, pageLimit);
   }, []);
 
@@ -43,6 +42,29 @@ function Leaderboard({ currentUser }) {
       setIsLoading(false);
     });
   }
+
+  const onLoadUpper = () => {
+    setUpperBound(upperBound + pageLimit);
+    setIsLoading(true);
+    getItemsRange(upperBound, upperBound + pageLimit, filterLiked).then(
+      (data) => {
+        setIsLoading(false);
+        setLoadUpper(data.loadUpper);
+        setScoreData([...scoreData, ...data.items]);
+      }
+    );
+  };
+  const onLoadLower = () => {
+    setLowerBound(lowerBound - pageLimit);
+    setIsLoading(true);
+    getItemsRange(lowerBound - pageLimit, lowerBound, filterLiked).then(
+      (data) => {
+        setIsLoading(false);
+        setLoadLower(data.loadLower);
+        setScoreData([...data.items, ...scoreData]);
+      }
+    );
+  };
 
   const handleDropdownChange = (e) => {
     if (e.target.value != dropdownValue) {
@@ -121,22 +143,7 @@ function Leaderboard({ currentUser }) {
         </div>
         <ol className="leaderboard__card-list">
           {loadLower && !isLoading ? (
-            <Button
-              className="leaderboard__load-button"
-              onClick={() => {
-                setLowerBound(lowerBound - pageLimit);
-                setIsLoading(true);
-                getItemsRange(
-                  lowerBound - pageLimit,
-                  lowerBound,
-                  filterLiked
-                ).then((data) => {
-                  setIsLoading(false);
-                  setLoadLower(data.loadLower);
-                  setScoreData([...data.items, ...scoreData]);
-                });
-              }}
-            >
+            <Button className="leaderboard__load-button" onClick={onLoadLower}>
               Load More
             </Button>
           ) : (
@@ -154,22 +161,7 @@ function Leaderboard({ currentUser }) {
           })}
           {isLoading ? <Preloader></Preloader> : <></>}
           {loadUpper && !isLoading ? (
-            <Button
-              className="leaderboard__load-button"
-              onClick={() => {
-                setUpperBound(upperBound + pageLimit);
-                setIsLoading(true);
-                getItemsRange(
-                  upperBound,
-                  upperBound + pageLimit,
-                  filterLiked
-                ).then((data) => {
-                  setIsLoading(false);
-                  setLoadUpper(data.loadUpper);
-                  setScoreData([...scoreData, ...data.items]);
-                });
-              }}
-            >
+            <Button className="leaderboard__load-button" onClick={onLoadUpper}>
               Load More
             </Button>
           ) : (
