@@ -1,3 +1,4 @@
+import { resolve } from "mathjs";
 import { data } from "react-router-dom";
 
 const baseUrl =
@@ -174,9 +175,6 @@ function sortItems() {
   });
 }
 
-export function getItems() {
-  return fetchCall("/items");
-}
 export function getItemsRange(start, end, filterLiked = false) {
   return new Promise((resolve) => setTimeout(resolve, 500)).then(() => {
     sortItems();
@@ -194,11 +192,14 @@ export function getItemsRange(start, end, filterLiked = false) {
     };
   });
 }
+
 export function postItem(body, token) {
-  return fetchCall("/items", token, "POST", JSON.stringify(body));
-}
-export function GetItemsSorted() {
-  return fetchCall("/items?_sort=score,username&_order=desc,asc");
+  return new Promise((resolve) => setTimeout(resolve, 500))
+    .then(() => {
+      database.items.push(body);
+      sortItems();
+    })
+    .catch(console.error);
 }
 
 export function getGameCount() {
@@ -206,6 +207,7 @@ export function getGameCount() {
     resolve(database.items.length);
   });
 }
+
 // switch to a user id system when backend is implemented
 export function getUserRank(username) {
   return new Promise((resolve) => setTimeout(resolve, 500))
@@ -219,16 +221,7 @@ export function getUserRank(username) {
     })
     .catch(console.error);
 }
-export function getLiked() {
-  return new Promise((resolve) => setTimeout(resolve, 500)).then(() => {
-    sortItems();
-    return {
-      items: database.items.filter((i) => i.liked),
-      loadLower: false,
-      loadUpper: false,
-    };
-  });
-}
+
 export function LikeItem(id) {
   return new Promise((resolve) => setTimeout(resolve, 100))
     .then(() => database.items.find((i) => i._id === id))
@@ -238,6 +231,7 @@ export function LikeItem(id) {
     })
     .catch(console.error);
 }
+
 export function UnlikeItem(id) {
   return new Promise((resolve) => setTimeout(resolve, 100))
     .then(() => database.items.find((i) => i._id === id))

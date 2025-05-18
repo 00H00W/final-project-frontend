@@ -1,6 +1,5 @@
 import "./App.css";
 import React from "react";
-import Preloader from "../Preloader/Preloader";
 import Header from "../Header/Header";
 import { Routes, Route } from "react-router-dom";
 import Main from "../Main/Main";
@@ -11,7 +10,6 @@ import LoginModal from "../Modals/LoginModal/LoginModal";
 import RegisterModal from "../Modals/RegisterModal/RegisterModal";
 import * as auth from "../../utils/auth";
 import { postItem } from "../../utils/mockApi";
-import Button from "../Button/Button";
 import ProfileModal from "../Modals/Profile/ProfileModal";
 
 function App() {
@@ -83,8 +81,6 @@ function App() {
     });
   };
   const postGameData = (data) => {
-    console.log(currentUser);
-    console.log({ ...data, username: currentUser.data.name });
     return postItem({ ...data, username: currentUser.data.name });
   };
   return (

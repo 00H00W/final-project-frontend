@@ -3,14 +3,10 @@ import LeaderCard from "./LeaderCard/LeaderCard";
 import Button from "../Button/Button";
 import { useState, useEffect } from "react";
 import {
-  getItems,
-  postItem,
-  GetItemsSorted,
   getItemsRange,
   getUserRank,
   LikeItem,
   UnlikeItem,
-  getLiked,
 } from "../../utils/mockApi";
 import Preloader from "../Preloader/Preloader";
 
@@ -150,7 +146,7 @@ function Leaderboard({ currentUser }) {
           {scoreData.map((item, i) => {
             return (
               <LeaderCard
-                key={item._id}
+                key={item.index}
                 user={{ ...item, rank: item.index + 1 }}
                 saveItem={handleSaveItem}
               />
