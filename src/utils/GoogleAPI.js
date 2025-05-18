@@ -1,4 +1,5 @@
 import { cross, dot, subtract, add, hypot, norm, min } from "mathjs";
+import { Loader } from "@googlemaps/js-api-loader";
 
 // right now we have ~20% hit rate
 // include coordinate ranges for a bounding box as the first entry in each region
@@ -147,6 +148,93 @@ const template = [
   ],
 ];
 */
+
+// AIzaSyAngbtnimx927JnCrvxEx2ZvPUknY3bsoI
+// AIzaSyDtw4jIS0wrL1nl7HC50zDT-ZhMNx5Jb94
+let loading = false;
+export function loadGoogleApi(setActual, setGuess) {
+  if (loading) return;
+  loading = true;
+  const loader = new Loader({
+    apiKey: "AIzaSyAngbtnimx927JnCrvxEx2ZvPUknY3bsoI",
+    version: "weekly",
+  });
+
+  let newPano;
+  let newMap;
+  let newMarker;
+
+  const startPosition = GetPosition();
+  const fenway = { lat: 42.345573, lng: -71.098326 };
+
+  console.log("creating panorama");
+  return loader
+    .importLibrary("streetView")
+    .then(({ StreetViewPanorama }) => {
+      console.log("successfully loaded streetView library");
+      newPano = new StreetViewPanorama(document.getElementById("pano"), {
+        position: startPosition,
+        addressControl: false,
+        zoomControl: false,
+      });
+      newPano.addListener("position_changed", () => {
+        console.log(
+          newPano.getPosition().lat() + ", " + newPano.getPosition().lng()
+        );
+      });
+    })
+    .then(() => {
+      return GetPano(startPosition, newPano);
+    })
+    .then((data) => setActual(data.data.location.latLng))
+    .then(() => {
+      console.log("creating map");
+      return loader.importLibrary("maps");
+    })
+    .then(({ Map }) => {
+      console.log("successfully loaded maps library");
+      newMap = new Map(document.getElementById("map"), {
+        center: fenway,
+        zoom: 8,
+        streetViewControl: false,
+        gestureHandling: "greedy",
+        mapId: "4504f8b37365c3d0",
+      });
+    })
+    .then(() => {
+      console.log("creating marker");
+      return loader.importLibrary("marker");
+    })
+    .then(({ AdvancedMarkerElement, PinElement }) => {
+      console.log("successfully loaded marker library");
+      const pinStyle = new PinElement({
+        background: "#258ac9",
+        borderColor: "#0d6297",
+        glyphColor: "#0d6297",
+      });
+      newMarker = new AdvancedMarkerElement({
+        map: null,
+        position: fenway,
+        content: pinStyle.element,
+      });
+      newMap.addListener("click", (e) => {
+        const position = {
+          lat: e.latLng.lat(),
+          lng: e.latLng.lng(),
+        };
+        newMarker.setMap(newMap);
+        newMarker.position = position;
+        setGuess(position);
+      });
+    })
+    .then(() => {
+      return { panorama: newPano, map: newMap, marker: newMarker };
+    })
+    .catch(console.error)
+    .finally(() => {
+      loading = false;
+    });
+}
 
 export function CalculateScoreValue(geodistance) {
   return Math.round(
