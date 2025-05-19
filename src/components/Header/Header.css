@@ -5,8 +5,9 @@
     rgb(178, 211, 226),
     rgb(222, 239, 247)
   );
-  display: flex;
-  align-items: stretch;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: 1f;
   padding: 6px;
   border-bottom: solid 1px rgb(178, 211, 226);
 }
@@ -17,6 +18,10 @@
 
 .header__logo-image {
   height: 48px;
+}
+
+.header__nav-bar {
+  z-index: 1;
 }
 
 .header__account-buttons {
@@ -46,4 +51,15 @@
 .header__profile-name {
   margin: 0 0 0 8px;
   user-select: none;
+}
+
+@media screen and (max-width: 627px) {
+  .header {
+    grid-template-columns: auto auto;
+    grid-template-rows: 1f 1f;
+  }
+
+  .header__nav-bar {
+    grid-area: 2/1/3/3;
+  }
 }

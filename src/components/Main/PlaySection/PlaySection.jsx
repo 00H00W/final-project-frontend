@@ -10,6 +10,7 @@ function PlaySection() {
       <div className="play-section__content">
         <h2 className="play-section__heading">PinPoint</h2>
         <Button
+          className={"play-section__play-button"}
           onClick={() => {
             nav("/game");
           }}

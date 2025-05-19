@@ -48,3 +48,9 @@
   justify-content: stretch;
   gap: 2px;
 }
+
+@media screen and (max-width: 627px) {
+  .leaderboard__content {
+    margin: 0 24px;
+  }
+}

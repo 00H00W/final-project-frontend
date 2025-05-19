@@ -10,7 +10,7 @@ function Header({ openModal, isLoggedIn, userData }) {
       <Link className="header__logo" to={"/"}>
         <img className="header__logo-image" src={logo} alt="PinPoint Logo" />
       </Link>
-      <NavBar />
+      <NavBar className={"header__nav-bar"} />
       <span className="header__account-buttons">
         {isLoggedIn ? (
           <>

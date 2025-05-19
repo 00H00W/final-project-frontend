@@ -1,24 +1,24 @@
 import "./NavBar.css";
 import { NavLink } from "react-router-dom";
 
-function NavBar() {
-  const className = ({ isActive }) =>
+function NavBar({ className }) {
+  const generateClassName = ({ isActive }) =>
     "navbar__button" + (isActive ? " navbar__button_selected" : "");
   return (
-    <nav className="navbar">
+    <nav className={`navbar ${className}`}>
       <ul className="navbar__list">
         <li className="navbar__item">
-          <NavLink className={className} to={"/"}>
+          <NavLink className={generateClassName} to={"/"}>
             <p className="navbar__button-text">Home</p>
           </NavLink>
         </li>
         <li className="navbar__item">
-          <NavLink className={className} to={"/game"}>
+          <NavLink className={generateClassName} to={"/game"}>
             <p className="navbar__button-text">Play</p>
           </NavLink>
         </li>
         <li className="navbar__item">
-          <NavLink className={className} to={"/leaderboard"}>
+          <NavLink className={generateClassName} to={"/leaderboard"}>
             <p className="navbar__button-text">Leaderboard</p>
           </NavLink>
         </li>
