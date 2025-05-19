@@ -201,12 +201,6 @@ export function postItem(body, token) {
     .catch(console.error);
 }
 
-export function getGameCount() {
-  return new Promise((resolve, reject) => {
-    resolve(database.items.length);
-  });
-}
-
 // switch to a user id system when backend is implemented
 export function getUserRank(username) {
   return new Promise((resolve) => setTimeout(resolve, 500))
