@@ -156,6 +156,7 @@ function Leaderboard({ currentUser }) {
                 key={item.index}
                 user={{ ...item, rank: item.index + 1 }}
                 saveItem={handleSaveItem}
+                highlight={item.username === currentUser.data.name}
               />
             );
           })}

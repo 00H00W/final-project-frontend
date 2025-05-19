@@ -12,7 +12,14 @@
   max-width: 480px;
 }
 
+.about-section__body {
+  margin: 12px 0;
+}
+
 .about-section__headshot {
   border-radius: 8px;
   max-height: 200px;
+}
+.about-section__headshot:hover {
+  cursor: pointer;
 }

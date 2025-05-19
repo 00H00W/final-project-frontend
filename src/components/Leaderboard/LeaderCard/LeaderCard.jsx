@@ -3,7 +3,7 @@ import bookmarkOpen from "../../../assets/bookmark-open.svg";
 import bookmarkClosed from "../../../assets/bookmark-closed.svg";
 import React from "react";
 
-function LeaderCard({ user, saveItem }) {
+function LeaderCard({ user, saveItem, highlight }) {
   const [entry, setEntry] = React.useState(user);
 
   const handleClick = () => {
@@ -13,7 +13,10 @@ function LeaderCard({ user, saveItem }) {
   };
 
   return (
-    <li onClick={handleClick} className="leadercard">
+    <li
+      onClick={handleClick}
+      className={`leadercard${highlight ? " leadercard_highlight" : ""}`}
+    >
       <p className="leadercard__text"># {entry.index + 1}</p>
       <img
         className="leadercard__save-icon"

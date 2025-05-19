@@ -18,7 +18,7 @@ function PlaySection() {
         </Button>
         <p className="play-section__description">
           Identify winding streets, infer geographic features, interpret
-          architecure, and pinpoint your location on the globe!
+          cultural architecure, and pinpoint your location on the globe!
         </p>
       </div>
     </section>

@@ -1,8 +1,32 @@
-# React + Vite
+# PinPoint
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A react front-end project by Sam branham
 
-Currently, two official plugins are available:
+## Description
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This website is intended to function as a game of guessing your location on the globe from Google Streetview panoramas.
+
+Functionality:
+
+- Multiple routes using ReactRouter.
+- Log in / Sign up modals.
+- Google API integration with Streetview and Map components.
+- Backend integration to display and interact with user's scores.
+
+## Tech stack
+
+- HTML
+- JavaScript
+- CSS
+- React framework
+- API integration
+
+## Deployment
+
+- [git hub pages](https://00h00w.github.io/final-project-frontend/)
+- [git hub repo](https://github.com/00H00W/final-project-frontend)
+
+## Planned features and improvements
+
+- Backend integration
+- Mobile / responsive design
