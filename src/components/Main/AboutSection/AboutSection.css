@@ -1,0 +1,37 @@
+.about-section {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 48px 48px;
+  background-color: rgb(222, 239, 247);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+}
+
+.about-section__text-content {
+  max-width: 480px;
+}
+
+.about-section__body {
+  margin: 12px 0;
+}
+
+.about-section__headshot {
+  border-radius: 8px;
+  max-height: 300px;
+}
+.about-section__headshot:hover {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 627px) {
+  .about-section {
+    flex-direction: column;
+  }
+
+  .about-section__headshot {
+    max-height: 100%;
+    max-width: 75%;
+  }
+}

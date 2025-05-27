@@ -1,0 +1,15 @@
+.footer {
+  border-top: solid 1px rgb(178, 211, 226);
+  background-image: linear-gradient(
+    to right,
+    rgb(178, 211, 226),
+    rgb(222, 239, 247)
+  );
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+}
+
+.footer__text {
+  margin: 0;
+}

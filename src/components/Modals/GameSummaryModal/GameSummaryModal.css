@@ -1,0 +1,22 @@
+.game-summary-modal__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.game-summary-modal__title {
+  margin: 12px auto;
+}
+
+.game-summary-modal__stats {
+  margin: 12px auto;
+}
+
+.game-summary-modal__button {
+  margin: 0 auto 6px;
+  width: 130px;
+}
+
+.game-summary-modal__text {
+  margin: 4px auto;
+}

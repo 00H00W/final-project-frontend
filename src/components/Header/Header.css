@@ -1,0 +1,65 @@
+.header {
+  background-color: rgb(178, 211, 226);
+  background-image: linear-gradient(
+    to right,
+    rgb(178, 211, 226),
+    rgb(222, 239, 247)
+  );
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-template-rows: 1f;
+  padding: 6px;
+  border-bottom: solid 1px rgb(178, 211, 226);
+}
+
+.header__logo {
+  margin-right: 32px;
+}
+
+.header__logo-image {
+  height: 48px;
+}
+
+.header__nav-bar {
+  z-index: 1;
+}
+
+.header__account-buttons {
+  margin: auto 12px auto auto;
+  display: flex;
+  gap: 8px;
+}
+
+.header__profile-button {
+  display: flex;
+  align-items: center;
+  padding: 0 4px;
+}
+.header__profile-button:hover {
+  cursor: pointer;
+}
+
+.header__profile-image {
+  max-width: 40px;
+  max-height: 40px;
+  width: 100%;
+  aspect-ratio: 1;
+  border: 2px solid rgb(37, 138, 201);
+  border-radius: 50%;
+}
+
+.header__profile-name {
+  margin: 0 0 0 8px;
+  user-select: none;
+}
+
+@media screen and (max-width: 627px) {
+  .header {
+    grid-template-columns: auto auto;
+    grid-template-rows: 1f 1f;
+  }
+
+  .header__nav-bar {
+    grid-area: 2/1/3/3;
+  }
+}

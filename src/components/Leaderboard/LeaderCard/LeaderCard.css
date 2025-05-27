@@ -1,0 +1,32 @@
+.leadercard {
+  list-style: none;
+  display: flex;
+  border: 2px solid rgb(37, 138, 201);
+  border-radius: 8px;
+  gap: 12px;
+  padding: 4px 12px;
+}
+.leadercard:hover {
+  cursor: pointer;
+}
+.leadercard_highlight {
+  background-color: rgb(185, 215, 233);
+}
+
+.leadercard__text {
+  margin: 0;
+}
+.leadercard__text:first-child {
+  width: 40px;
+}
+.leadercard__text:last-child {
+  margin-left: auto;
+}
+
+.leadercard__save-icon {
+  height: 20px;
+  opacity: 0.5;
+}
+.leadercard:hover .leadercard__save-icon {
+  opacity: 1;
+}
